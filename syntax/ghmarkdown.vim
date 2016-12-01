@@ -1,11 +1,8 @@
 " Vim syntax file
 " Language:     Github Flavored Markdown
 " Markdown.vim Maintainer: Tim Pope <vimNOSPAM@tpope.org>
-" GFM Maintainer: Jeff Tratner <github.com/jtratner>
+" forked from: GFM Maintainer: Jeff Tratner <github.com/jtratner>
 " Filenames:    *.ghmarkdown
-" Last Change:	2013 June 8
-" (nearly the same as tpope's markdown.vim, with a few 
-" add-ons for Github Flavored Markdown)
 
 if exists("b:current_syntax")
   finish
@@ -43,8 +40,6 @@ syn region markdownH6 matchgroup=markdownHeadingDelimiter start="#######\@!" end
 
 syn match markdownBlockquote ">\%(\s\|$\)" contained nextgroup=@markdownBlock
 
-syn region markdownCodeBlock start="    \|\t" end="$" contained
-
 " TODO: real nesting
 syn match markdownListMarker "\%(\t\| \{0,4\}\)[-*+]\%(\s\+\S\)\@=" contained
 syn match markdownOrderedListMarker "\%(\t\| \{0,4}\)\<\d\+\.\%(\s\+\S\)\@=" contained
@@ -66,13 +61,30 @@ syn region markdownLink matchgroup=markdownLinkDelimiter start="(" end=")" conta
 syn region markdownId matchgroup=markdownIdDelimiter start="\[" end="\]" keepend contained
 syn region markdownAutomaticLink matchgroup=markdownUrlDelimiter start="<\%(\w\+:\|[[:alnum:]_+-]\+@\)\@=" end=">" keepend oneline
 
-syn region markdownItalic start="\<\*\|\*\>" end="\<\*\|\*\>" keepend contains=markdownLineStart
-syn region markdownItalic start="\<_\|_\>" end="\<_\|_\>" keepend contains=markdownLineStart
-syn region markdownBold start="\<\*\*\|\*\*\>" end="\<\*\*\|\*\*\>" keepend contains=markdownLineStart,markdownItalic
-syn region markdownBold start="\<__\|__\>" end="\<__\|__\>" keepend contains=markdownLineStart,markdownItalic
-syn region markdownBoldItalic start="\<\*\*\*\|\*\*\*\>" end="\<\*\*\*\|\*\*\*\>" keepend contains=markdownLineStart
-syn region markdownBoldItalic start="\<___\|___\>" end="\<___\|___\>" keepend contains=markdownLineStart
-syn region markdownCode matchgroup=markdownCodeDelimiter start="`" end="`" keepend contains=markdownLineStart
+syn clear htmlBold
+syn clear htmlBoldUnderline
+syn clear htmlBoldItalic
+syn clear htmlBoldUnderlineItalic
+syn clear htmlBoldItalicUnderline
+syn clear htmlUnderline
+syn clear htmlUnderlineBold
+syn clear htmlUnderlineItalic
+syn clear htmlUnderlineItalicBold
+syn clear htmlUnderlineBoldItalic
+syn clear htmlItalic
+syn clear htmlItalicBold
+syn clear htmlItalicBoldUnderline
+syn clear htmlItalicUnderline
+syn clear htmlItalicUnderlineBold
+
+syn region markdownItalic start="\%(^\|\s\)\zs\*\ze[^\\\*\t ]\%(\%([^*]\|\\\*\|\n\)*[^\\\*\t ]\)\?\*\_W" end="[^\\\*\t ]\zs\*\ze\_W" keepend oneline
+syn region markdownItalic start="\%(^\|\s\)\zs_\ze[^\\_\t ]" end="[^\\_\t ]\zs_\ze\_W" keepend oneline
+syn region markdownBold start="\%(^\|\s\)\*\*\ze\S" end="\S\zs\*\*" keepend oneline
+syn region markdownBold start="\%(^\|\s\)\zs__\ze\S" end="\S\zs__" keepend oneline
+syn region markdownBoldItalic start="\%(^\|\s\)\zs\*\*\*\ze\S" end="\S\zs\*\*\*" keepend oneline
+syn region markdownBoldItalic start="\%(^\|\s\)\zs___\ze\S" end="\S\zs___" keepend oneline
+
+syn region markdownCode matchgroup=markdownCodeDelimiter start="`" end="`" keepend oneline contained
 syn region markdownCode matchgroup=markdownCodeDelimiter start="``` \=" end=" \=```" keepend contains=markdownLineStart
 syn region markdownGHCodeBlock matchgroup=markdownCodeDelimiter start="^\s*$\n\s*```\s\?\S*\s*$" end="\s*```$\n\s*\n" contained  keepend
 
