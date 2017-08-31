@@ -44,8 +44,9 @@ syn match markdownBlockquote ">\%(\s\|$\)" contained nextgroup=@markdownBlock
 syn match markdownListMarker "\%(\t\| \{0,4\}\)[-*+]\%(\s\+\S\)\@=" contained
 syn match markdownOrderedListMarker "\%(\t\| \{0,4}\)\<\d\+\.\%(\s\+\S\)\@=" contained
 
-syn match markdownRule "\* *\* *\*[ *]*$" contained
-syn match markdownRule "- *- *-[ -]*$" contained
+"syn match markdownRule "\* *\* *\*[ *]*$" contained
+"syn match markdownRule "- *- *-[ -]*$" contained
+syn match markdownRule "^----*$" contained
 
 syn match markdownLineBreak " \{2,\}$"
 
@@ -85,8 +86,9 @@ syn region markdownBoldItalic start="\%(^\|\s\)\zs\*\*\*\ze\S" end="\S\zs\*\*\*"
 syn region markdownBoldItalic start="\%(^\|\s\)\zs___\ze\S" end="\S\zs___" keepend oneline
 
 syn region markdownCode matchgroup=markdownCodeDelimiter start="`" end="`" keepend oneline contained
-syn region markdownCode matchgroup=markdownCodeDelimiter start="``` \=" end=" \=```" keepend contains=markdownLineStart
-syn region markdownGHCodeBlock matchgroup=markdownCodeDelimiter start="^\s*$\n\s*```\s\?\S*\s*$" end="\s*```$\n\s*\n" contained  keepend
+syn region markdownGHCodeBlock matchgroup=markdownCodeDelimiter start="^\s*```\s\?\S*\s*$" end="\s*```$\n" contained  keepend
+"syn region markdownGHCodeBlock matchgroup=markdownCodeDelimiter start="^\s*$\n\s*```\s\?\S*\s*$" end="\s*```$\n\s*\n" contained  keepend
+"syn region markdownCode matchgroup=markdownCodeDelimiter start="``` \=" end=" \=```" keepend contains=markdownLineStart
 
 syn match markdownEscape "\\[][\\`*_{}()#+.!-]"
 
@@ -100,7 +102,7 @@ hi def link markdownH3                    htmlH3
 hi def link markdownH4                    htmlH4
 hi def link markdownH5                    htmlH5
 hi def link markdownH6                    htmlH6
-hi def link markdownHeadingRule           markdownRule
+hi def link markdownHeadingRule           markdownCode
 hi def link markdownHeadingDelimiter      Delimiter
 hi def link markdownOrderedListMarker     markdownListMarker
 hi def link markdownListMarker            htmlTagName
