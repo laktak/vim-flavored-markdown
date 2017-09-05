@@ -79,11 +79,11 @@ syn clear htmlItalicUnderline
 syn clear htmlItalicUnderlineBold
 
 syn region markdownItalic start="\%(^\|\s\)\zs\*\ze[^\\\*\t ]\%(\%([^*]\|\\\*\|\n\)*[^\\\*\t ]\)\?\*\_W" end="[^\\\*\t ]\zs\*\ze\_W" keepend oneline
-syn region markdownItalic start="\%(^\|\s\)\zs_\ze[^\\_\t ]" end="[^\\_\t ]\zs_\ze\_W" keepend oneline
+"syn region markdownItalic start="\%(^\|\s\)\zs_\ze[^\\_\t ]" end="[^\\_\t ]\zs_\ze\_W" keepend oneline
 syn region markdownBold start="\%(^\|\s\)\*\*\ze\S" end="\S\zs\*\*" keepend oneline
-syn region markdownBold start="\%(^\|\s\)\zs__\ze\S" end="\S\zs__" keepend oneline
+"syn region markdownBold start="\%(^\|\s\)\zs__\ze\S" end="\S\zs__" keepend oneline
 syn region markdownBoldItalic start="\%(^\|\s\)\zs\*\*\*\ze\S" end="\S\zs\*\*\*" keepend oneline
-syn region markdownBoldItalic start="\%(^\|\s\)\zs___\ze\S" end="\S\zs___" keepend oneline
+"syn region markdownBoldItalic start="\%(^\|\s\)\zs___\ze\S" end="\S\zs___" keepend oneline
 
 syn region markdownCode matchgroup=markdownCodeDelimiter start="`" end="`" keepend oneline contained
 syn region markdownGHCodeBlock matchgroup=markdownCodeDelimiter start="^\s*```\s\?\S*\s*$" end="\s*```$\n" contained  keepend
